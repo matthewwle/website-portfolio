@@ -116,9 +116,10 @@ section{
   .text-container{
     text-align: justify;
   }
+
+  .yt{
+    width: 300px;
+    height: 250px;
+  }
 }
 
-.yt{
-  width: 300px;
-  height: 250px;
-}
