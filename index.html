@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mediaqueries.css">
+</head>
+<body>
+  <nav id="desktop-nav">
+    <div class="logo"> Matthew Le</div>
+    <div>
+     <ul class="nav-links">
+       <li><a href = "#about">About</a></li>
+       <li><a href = "#experience">Experience</a></li>
+       <li><a href = "#projects">Projects</a></li>
+       <li><a href = "#contact">Contact</a></li>
+     </ul>
+    </div>
+  </nav>
+  <nav id="hamburger-nav">
+    <div class="logo"> Matthew Le</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick ="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class = "menu-links">
+        <li><a href = "#about"onclick ="toggleMenu()">About</a></li>
+        <li><a href = "#experience"onclick ="toggleMenu()">Experience</a></li>
+        <li><a href = "#projects"onclick ="toggleMenu()">Projects</a></li>
+        <li><a href = "#contact"onclick ="toggleMenu()">Contact</a></li>
+      </div>
+    </div>
+  </nav>
+  <section id="profile">
+    <div class="section__pic-container">
+      <img src = "./assets/final-headshot.png" alt = "Matthew Le Profile Picture"/>
+    </div>
+    <div class="section__text">
+      <h1 class="title">Matthew Le</h1>
+      <p class="section__text__p2">Computer Science Student</p>
+      <div class="btn-container">
+        <button class="btn btn-color-2" onclick="window.open('./assets/csresume.pdf')">
+          Download CV
+        </button>
+        <button class="btn btn-color-1" onclick="location.href='./#contact'">
+          Contact Info
+        </button>
+      </div>
+      <div id = "socials-container">
+        <img src="./assets/linkedin.png" alt = "My LinkedIn profile"
+        class = "icon" onclick="location.href='https://www.linkedin.com/in/matthew-le-35890b267/'"/>
+        <img src="./assets/github.png" alt = "My Github profile"
+        class = "icon" onclick="location.href='https://github.com/matthewwle'"/>
+      </div>
+      <img class="instagram"src="./assets/instagram.png" alt = "My Instagram profile"
+      class = "icon" onclick="location.href='https://www.instagram.com/mattheww.le/'"/>
+    </div>
+  </section>
+  <section id="about">
+    <p class="section__text__p1">Get To Know More</p>
+    <h1 class="title">About Me</h1>
+    <div class = "section-container">
+      <div class="section_pic-container">
+        <img src="./assets/IMG_3116-preview.jpg"
+        alt="Profile Picture"
+        class = "about-pic"
+        />
+      </div>
+      <div class = "about-details-container">
+        <div class = "about-containers">
+          <div class = "details-container">
+            <img src = "./assets/experience.png"
+            alt="Experience Icon"
+            class = "icon"
+            />
+            <h3>Coursework</h3>
+            <p>Data Structures and Algorithms <br />Full Calculus Series</p>
+          </div>
+          <div class="details-container">
+            <img src = "./assets/education.png"
+            alt="Education Icon"
+            class = "icon"
+            />
+            <h3>Education</h3>
+            <p>Pursuing Bachelor Degree in CS <br />4.0 GPA</p>
+          </div>
+        </div>
+        <div class="text-container">
+          <p>
+            Hello! My name is Matthew Le and I reside in Arcadia, California. Currently,
+            I am attending Pasadena City College with an intent to transfer in the Fall of 2024.
+            Growing up, I have always had an affinity for technology so naturally it turned from a
+            hobby to a passion. I hope to pursue a career in software engineering (front or back end)
+            or as a product manager. These two roles align my passions with my goals allowing me to
+            work on projects that will improve everday lives. In my downtime, I enjoy playing video
+            games, playing sports, and going to the gym.
+          </p>
+        </div>
+      </div>
+    </div>
+    <img src="./assets/arrow.png" alt ="Arrow Icon" class="icon arrow"
+    onclick="location.href = './#experience'"
+    />
+  </section>
+  <section id="experience">
+    <p class ="section__text__p1">Explore My</p>
+    <h1 class="title"> Experience</h1>
+      <div class= "about-containers">
+        <div class="details-container">
+          <h2 class="experience-sub-title">Frontend Development</h2>
+          <div class = "article-container">
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>HTML</h3>
+                <p>Proficient</p>
+              </div>
+            </article>
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>CSS</h3>
+                <p>Proficient</p>
+              </div>
+            </article>
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>Javascript</h3>
+                <p>Basic</p>
+              </div>
+            </article>
+          
+          </div>
+        </div>
+        <div class="details-container">
+          <h2 class="experience-sub-title">Backend Development</h2>
+          <div class = "article-container">
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>C++</h3>
+                <p>Advanced</p>
+              </div>
+            </article>
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>Python</h3>
+                <p>Proficient</p>
+              </div>
+            </article>
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>Java</h3>
+                <p>Proficient</p>
+              </div>
+            </article>
+            
+          </div>
+        </div>
+        <div class="details-container">
+          <h2 class="experience-sub-title">Work Experience</h2>
+          <div class = "article-container">
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>Server</h3>
+                <p>Menya Hanabi</p>
+              </div>
+            </article>
+            <article>
+              <img src = "./assets/checkmark.png"
+              alt = "Experience icon"
+              class = icon
+              />
+              <div>
+                <h3>Volleyball Coach</h3>
+                <p>San Gabriel Elite</p>
+              </div>
+            </article>
+            
+          </div>
+        </div>
+      </div>
+    
+    <img src="./assets/arrow.png" alt ="Arrow Icon" class="icon arrow"
+    onclick="location.href = './#projects'"
+    />
+  </section>
+  <section id="projects">
+    <p class="section__text__p1">Browse My Recent</p>
+    <h1 class="title">Projects</h1>
+    <div class ="experience-details-container">
+      <div class="details--container">
+        <iframe class = "yt" width="840" height="473" src="https://www.youtube.com/embed/ShL_V08l2vg?si=Ebf4eqUK9DHu8pfB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <h2 class="label">Graphing Calculator</h2>
+        </div>
+      </div>
+    </div>
+    <img src="./assets/arrow.png" alt ="Arrow Icon" class="icon arrow"
+    onclick="location.href = './#contact'"
+    />
+  </section>
+  <section id="contact">
+    <p class = "section__text__p1">Get in Touch</p>
+    <h1 class = "title">Contact Me</h1>
+    <div class = "contact-info-upper-container">
+      <div class = "contact-info-container" >
+        <img src="./assets/email.png"
+        alt="Email Icon"
+        class = "icon contact-icon email-icon";
+        />
+        <p><a href="https://www.linkedin.com/in/matthew-le-35890b267/">matthewleofficial@gmail.com</a></p>
+      </div>
+      <div class = "contact-info-container">
+        <img src="./assets/linkedin.png"
+        alt="LinkedIn Icon"
+        class = "icon contact-icon";
+        />
+        <p><a href="">LinkedIn</a></p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <nav>
+      <div class = "nav-links-container">
+        <ul class="nav-links">
+          <li><a href = "#about">About</a></li>
+          <li><a href = "#experience">Experience</a></li>
+          <li><a href = "#projects">Projects</a></li>
+          <li><a href = "#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <p>Copyright &#169; 2023 Matthew Le. All Rights Reserved</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
