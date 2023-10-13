@@ -375,8 +375,18 @@ article .icon{
   text-align: center;
 }
 
+.project-details-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .label{
   text-align: center;
+}
+
+.desc{
+  text-align:center;
 }
 
 /* Contact Section */
