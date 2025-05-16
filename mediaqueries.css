@@ -192,4 +192,21 @@
       0 0 12px #A6BCC7;
   }
   
+  .hamburger-menu {
+    position: relative;
+    display: inline-block;
+    border-bottom: none;
+  }
+  
+  .menu-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1001;
+    background-color: #1e1e1e;
+    border: none;         /* 💥 Remove border if not needed */
+    box-shadow: none;     /* 💥 Prevent unexpected lines */
+  }
+  
+
 }
