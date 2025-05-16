@@ -65,3 +65,4 @@ function toggleThought(element) {
   body.style.display = body.style.display === "block" ? "none" : "block";
 }
 
+//testing if github push auto updates firebase now
