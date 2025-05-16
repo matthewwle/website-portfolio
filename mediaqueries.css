@@ -146,3 +146,50 @@
     height: 250px;
   }
 }
+
+
+@media screen and (max-width: 768px) {
+  #home {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .section__pic-container,
+  .glow-ring {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .glow-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* 👈 Make it circular */
+    object-fit: cover;
+  }
+
+  .section__text {
+    margin-top: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .section__text__p2 {
+    font-size: 1.2rem;
+
+    
+  }
+
+  .glow-ring {
+    box-shadow:
+      0 0 6px #A6BCC7,
+      0 0 12px #A6BCC7;
+  }
+  
+}
