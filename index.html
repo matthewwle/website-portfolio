@@ -7,16 +7,65 @@
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="mediaqueries.css">
+
+  <script type="module">
+    // Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getFirestore, collection, getDocs, query, orderBy
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  
+  const firebaseConfig = {
+  apiKey: "AIzaSyAd0U23AV7uwoikBWOWQjBhWlJCDEMCArM",
+  authDomain: "matthewle-website.firebaseapp.com",
+  projectId: "matthewle-website",
+  storageBucket: "matthewle-website.firebasestorage.app",
+  messagingSenderId: "702904294880",
+  appId: "1:702904294880:web:e18632b8f554e5b21e5f85",
+  measurementId: "G-T08ME0BK0N"
+};
+  
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+  
+    async function loadThoughts() {
+      const thoughtsRef = collection(db, "thoughts");
+      const q = query(thoughtsRef, orderBy("date", "desc"));
+      const querySnapshot = await getDocs(q);
+  
+      const container = document.querySelector(".thoughts-container");
+      container.innerHTML = "";
+  
+      querySnapshot.forEach((doc) => {
+        const t = doc.data();
+        const div = document.createElement("div");
+        div.className = "thought";
+        div.onclick = () => div.querySelector(".thought-body").classList.toggle("open");
+        div.innerHTML = `
+          <div class="thought-header">
+            <h3 class="thought-title">${t.title}</h3>
+            <p class="thought-date">${t.date}</p>
+          </div>
+          <div class="thought-body"><p>${t.body}</p></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+  
+    window.addEventListener("DOMContentLoaded", loadThoughts);
+  </script>
+  
+
 </head>
 <body>
   <nav id="desktop-nav">
-    <div class="logo"> Matthew Le</div>
+    <div class="logo"> matt le</div>
     <div>
      <ul class="nav-links">
+      <li><a href = "#home">Home</a></li>
        <li><a href = "#about">About</a></li>
        <li><a href = "#experience">Experience</a></li>
-       <li><a href = "#projects">Projects</a></li>
-       <li><a href = "#contact">Contact</a></li>
+       <li><a href = "#thoughts">Thoughts</a></li>
      </ul>
     </div>
   </nav>
@@ -36,13 +85,17 @@
       </div>
     </div>
   </nav>
-  <section id="profile">
-    <div class="section__pic-container">
-      <img src = "./assets/final-headshot.png" alt = "Matthew Le Profile Picture"/>
+  <section id="home">
+    <div class="section__pic-container slide-left">
+      <div class="glow-ring">
+        <img src="./assets/ghibli_headshot.png" alt="Matthew Le Profile Picture" />
+      </div>      
     </div>
-    <div class="section__text">
+    <div class="section__text slide-right">
+    
       <h1 class="title">Matthew Le</h1>
-      <p class="section__text__p2">Computer Science Student</p>
+      <p class="section__text__p2"><span id="typing-text"></span></p>
+
       <div class="btn-container">
         <button class="btn btn-color-2" onclick="window.open('./assets/Matthew_Le_Resume.pdf')">
           Download Resume
@@ -56,48 +109,25 @@
         class = "icon" onclick="location.href='https://www.linkedin.com/in/matthew-le-35890b267/'"/>
         <img src="./assets/github.png" alt = "My Github profile"
         class = "icon" onclick="location.href='https://github.com/matthewwle'"/>
-      </div>
-      <img class="instagram"src="./assets/instagram.png" alt = "My Instagram profile"
-      class = "icon" onclick="location.href='https://www.instagram.com/mattheww.le/'"/>
-    </div>
+      
   </section>
   <section id="about">
-    <p class="section__text__p1">Get To Know More</p>
-    <h1 class="title">About Me</h1>
+    
+    <h1 class="title"> about me</h1>
     <div class = "section-container">
       <div class="section_pic-container">
-        <img src="./assets/IMG_3116-preview.jpg"
+        <img src="./assets/AboutMePhoto.jpg"
         alt="Profile Picture"
         class = "about-pic"
         />
       </div>
       <div class = "about-details-container">
-        <div class = "about-containers">
-          <div class = "details-container">
-            <img src = "./assets/experience.png"
-            alt="Experience Icon"
-            class = "icon"
-            />
-            <h3>Coursework</h3>
-            <p>Data Structures and Algorithms <br />Software Construction <br /> Computer Organization</p>
-          </div>
-          <div class="details-container">
-            <img src = "./assets/education.png"
-            alt="Education Icon"
-            class = "icon"
-            />
-            <h3>Education</h3>
-            <p> Attending The University of California, Los Angeles <br /> Pursuing a Bachelors in Linguistics and Computer Science</p>
-          </div>
-        </div>
         <div class="text-container">
           <p>
-            Hello! My name is Matthew Le and I am currently based in Arcadia, California. Currently, I attend
-            UCLA studying linguistics and computer science. Growing up, I have always had an affinity for 
-            technology so naturally it turned from a hobby to a passion. I hope to pursue a career in product
-            management where I will be able to use both my soft and technical skills. My ultimate goal is to 
-            work on products that will be utilized and improve everday lives. In my downtime, 
-            I enjoy playing sports and working on my e-commerce brand.
+            hey! my name is matt and i'm a 21 year old ling+cs student at ucla. i love all things business and tech,
+            hoping to do something in the product management field. i love to create: products, businesses, ads, anything
+            and everything. when im not doing such, i love to play volleyball, lift weights, and read up on self improvement. 
+
           </p>
         </div>
       </div>
@@ -106,164 +136,132 @@
     onclick="location.href = './#experience'"
     />
   </section>
-  <section id="experience">
+  <section id="experience" class="timeline-section">
+    <h1 class="title">experience</h1>
+    <div class="timeline">
+  
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="left">
+              <div class="company">Menya Hanabi</div>
+              <div class="role">Server</div>
+            </div>
+            <div class="right">
+              <div class="time">June 2022 – June 2023</div>
+              <div class="location">Arcadia, CA</div>
+            </div>
+          </div>
+          <div class="description">learned how to deal with all types of people, served noodles like a pro</div>
+        </div>
+      </div>
 
-    <p class ="section__text__p1">Explore My</p>
-    <h1 class="title"> Experiences</h1>
-    <div class="experience-details-container">
-      <div class= "about-containers">
-        <div class="details-container">
-          <h2 class="experience-sub-title">Frontend Development</h2>
-          <div class = "article-container">
-            <article>
-              <img src = "./assets/checkmark.png"
-              alt = "Experience icon"
-              class = "icon"
-              />
-              <div>
-                <h3>HTML/CSS</h3>
-                <p>Proficient</p>
-              </div>
-            </article>
-            <article>
-              <img src = "./assets/checkmark.png"
-              alt = "Experience icon"
-              class = "icon"
-              />
-              <div>
-                <h3>React</h3>
-                <p>Proficient</p>
-              </div>
-            </article>
-            <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class= "icon"
-                />
-                <div>
-                  <h3>Node.js</h3>
-                  <p>Proficient</p>
-                </div>
-              </article>
-          
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="left">
+              <div class="company">San Gabriel Elite Volleyball Club</div>
+              <div class="role">Coach</div>
+            </div>
+            <div class="right">
+              <div class="time">Aug 2023 – Jul 2024</div>
+              <div class="location">Glendale, CA</div>
+            </div>
           </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Backend Development</h2>
-          <div class = "article-container">
-            <article>
-              <img src = "./assets/checkmark.png"
-              alt = "Experience icon"
-              class = "icon"
-              />
-              <div>
-                <h3>C++</h3>
-                <p>Advanced</p>
-              </div>
-            </article>
-            <article>
-              <img src = "./assets/checkmark.png"
-              alt = "Experience icon"
-              class = "icon"
-              />
-              <div>
-                <h3>Python</h3>
-                <p>Proficient</p>
-              </div>
-            </article>
-            <article>
-              <img src = "./assets/checkmark.png"
-              alt = "Experience icon"
-              class = "icon"
-              />
-              <div>
-                <h3>Java</h3>
-                <p>Proficient</p>
-              </div>
-            </article>
-            
-          </div>
-        </div>
-        <div class="details-container">
-          <h2 class="experience-sub-title">Work Experience</h2>
-          <div class = "article-container">
-            <article>
-              <img src = "./assets/checkmark.png"
-              alt = "Experience icon"
-              class = icon
-              />
-              <div>
-                <h3>StationZen</h3>
-                <p>Founder</p>
-              </div>
-            </article>
-            <article>
-              <img src = "./assets/checkmark.png"
-              alt = "Experience icon"
-              class = icon
-              />
-              <div>
-                <h3>Zebra Technologies</h3>
-                <p>Product Management Intern</p>
-              </div>
-            </article>
-            
-            
-          </div>
+          <div class="description">only time medaling in a USAV tournament was as a coach</div>
         </div>
       </div>
-    </div>
-    <img src="./assets/arrow.png" alt ="Arrow Icon" class="icon arrow"
-    onclick="location.href = './#projects'"
-    />
-  </section>
+      
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="left">
+              <div class="company">MM Commerce LLC</div>
+              <div class="role">Founder</div>
+            </div>
+            <div class="right">
+              <div class="time">Dec 2023 – Feb 2024</div>
+              <div class="location">Arcadia, CA</div>
+            </div>
+          </div>
+          <div class="description">first time seeing real internet money, family had some nice christmas presents</div>
+        </div>
+      </div>
 
-  <section id="projects">
-    <p class="section__text__p1">Browse My Recent</p>
-    <h1 class="title">Projects</h1>
-    <div class ="project-details-container">
-      <div class="details--container">
-        <iframe class = "yt" width="840" height="473" src="https://www.youtube.com/embed/ShL_V08l2vg?si=Ebf4eqUK9DHu8pfB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        
-        <h2 class="label">Graphing Calculator</h2>
-        <p class = "desc">Utilized SFML graphics library in C++ to create a graphing calculator with visuals. Used a variety of data structures to sort and calculate elements of equations needed to graph equations.
-          Used Shunting Yard and RPN algorithms to do the actual calculations of X and Y values plotted. Designed the functions of zooming, panning, graph history, and restoration of previous graphs. Video above for more details!</p>
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="left">
+              <div class="company">Encryptiest</div>
+              <div class="role">SWE Intern</div>
+            </div>
+            <div class="right">
+              <div class="time">Jun 2024 – Sep 2024</div>
+              <div class="location">Pasadena, CA</div>
+            </div>
+          </div>
+          <div class="description">first time doing swe work, made me realize i wanna go PM</div>
         </div>
       </div>
-    </div>
-    <img src="./assets/arrow.png" alt ="Arrow Icon" class="icon arrow"
-    onclick="location.href = './#contact'"
-    />
-  </section>
-  <section id="contact">
-    <p class = "section__text__p1">Get in Touch</p>
-    <h1 class = "title">Contact Me</h1>
-    <div class = "contact-info-upper-container">
-      <div class = "contact-info-container" >
-        <img src="./assets/email.png"
-        alt="Email Icon"
-        class = "icon contact-icon email-icon";
-        />
-        <p><a href="https://www.linkedin.com/in/matthew-le-35890b267/">matthewjle@g.ucla.edu</a></p>
+
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="left">
+              <div class="company">SportsVisio</div>
+              <div class="role">Operations Specialist</div>
+            </div>
+            <div class="right">
+              <div class="time">May 2025 – Present</div>
+              <div class="location">Seal Beach, CA</div>
+            </div>
+          </div>
+          <div class="description">got to work on with a volleyball AI company, cool opportunity</div>
+        </div>
       </div>
-      <div class = "contact-info-container">
-        <img src="./assets/linkedin.png"
-        alt="LinkedIn Icon"
-        class = "icon contact-icon";
-        />
-        <p><a href="">LinkedIn</a></p>
+
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="left">
+              <div class="company">Zebra Technologies</div>
+              <div class="role">Product Manager Intern</div>
+            </div>
+            <div class="right">
+              <div class="time">Jun 2025 – Sep 2025</div>
+              <div class="location">Westlake Village, CA</div>
+            </div>
+          </div>
+          <div class="description">hopefully this is fun, i'm excited</div>
+        </div>
       </div>
-    </div>
+  
+      
   </section>
+  
+
+  <section id="thoughts">
+    <h1 class="title">Thoughts</h1>
+    <div class="thoughts-container">Loading...</div>
+  </section>
+  
+  
+
+  
+  
   <footer>
     <nav>
       <div class = "nav-links-container">
         <ul class="nav-links">
+          <li><a href = "#home">Home</a></li>
           <li><a href = "#about">About</a></li>
           <li><a href = "#experience">Experience</a></li>
-          <li><a href = "#projects">Projects</a></li>
-          <li><a href = "#contact">Contact</a></li>
         </ul>
       </div>
     </nav>
