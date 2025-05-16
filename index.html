@@ -29,28 +29,38 @@
     const db = getFirestore(app);
   
     async function loadThoughts() {
-      const thoughtsRef = collection(db, "thoughts");
-      const q = query(thoughtsRef, orderBy("date", "desc"));
-      const querySnapshot = await getDocs(q);
-  
-      const container = document.querySelector(".thoughts-container");
-      container.innerHTML = "";
-  
-      querySnapshot.forEach((doc) => {
-        const t = doc.data();
-        const div = document.createElement("div");
-        div.className = "thought";
-        div.onclick = () => div.querySelector(".thought-body").classList.toggle("open");
-        div.innerHTML = `
-          <div class="thought-header">
-            <h3 class="thought-title">${t.title}</h3>
-            <p class="thought-date">${t.date}</p>
-          </div>
-          <div class="thought-body"><p>${t.text}</p></div>
-        `;
-        container.appendChild(div);
-      });
-    }
+  const thoughtsRef = collection(db, "thoughts");
+  const q = query(thoughtsRef, orderBy("date", "desc"));
+  const querySnapshot = await getDocs(q);
+
+  const container = document.querySelector(".thoughts-container");
+  container.innerHTML = "";
+
+  querySnapshot.forEach((doc) => {
+    const t = doc.data();
+
+    // 🔥 Apply newline formatting
+    const formattedText = t.text
+      .replace(/</g, "&lt;")         // optional: prevent HTML injection
+      .replace(/>/g, "&gt;")
+      .replace(/\n/g, "<br><br>");   // turns newlines into visible paragraph breaks
+
+    const div = document.createElement("div");
+    div.className = "thought";
+    div.onclick = () => div.querySelector(".thought-body").classList.toggle("open");
+
+    div.innerHTML = `
+      <div class="thought-header">
+        <h3 class="thought-title">${t.title}</h3>
+        <p class="thought-date">${t.date}</p>
+      </div>
+      <div class="thought-body">${formattedText}</div>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
   
     window.addEventListener("DOMContentLoaded", loadThoughts);
   </script>

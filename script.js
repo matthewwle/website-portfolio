@@ -54,6 +54,14 @@ document.addEventListener("DOMContentLoaded", type);
 
 function toggleThought(element) {
   const body = element.querySelector(".thought-body");
+
+  // Only format once (on first toggle)
+  if (!body.dataset.formatted) {
+    body.innerHTML = body.innerText.replace(/\n/g, "<br>");
+    body.dataset.formatted = "true";
+  }
+
+  // Toggle display
   body.style.display = body.style.display === "block" ? "none" : "block";
 }
 
