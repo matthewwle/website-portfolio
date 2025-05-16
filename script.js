@@ -65,4 +65,9 @@ function toggleThought(element) {
   body.style.display = body.style.display === "block" ? "none" : "block";
 }
 
-//testing if github push auto updates firebase now
+function goToPage(page) {
+  const isDesktop = window.innerWidth >= 768;
+  if (isDesktop) {
+    window.location.href = `${page}.html`;
+  }
+}

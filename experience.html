@@ -1,73 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="mediaqueries.css">
-
-  <script type="module">
-    // Firebase SDK
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import {
-      getFirestore, collection, getDocs, query, orderBy
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-  
-  const firebaseConfig = {
-  apiKey: "AIzaSyAd0U23AV7uwoikBWOWQjBhWlJCDEMCArM",
-  authDomain: "matthewle-website.firebaseapp.com",
-  projectId: "matthewle-website",
-  storageBucket: "matthewle-website.firebasestorage.app",
-  messagingSenderId: "702904294880",
-  appId: "1:702904294880:web:e18632b8f554e5b21e5f85",
-  measurementId: "G-T08ME0BK0N"
-};
-  
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-  
-    async function loadThoughts() {
-  const thoughtsRef = collection(db, "thoughts");
-  const q = query(thoughtsRef, orderBy("date", "desc"));
-  const querySnapshot = await getDocs(q);
-
-  const container = document.querySelector(".thoughts-container");
-  container.innerHTML = "";
-
-  querySnapshot.forEach((doc) => {
-    const t = doc.data();
-
-    // 🔥 Apply newline formatting
-    const formattedText = t.text
-      .replace(/</g, "&lt;")         // optional: prevent HTML injection
-      .replace(/>/g, "&gt;")
-      .replace(/\n/g, "<br><br>");   // turns newlines into visible paragraph breaks
-
-    const div = document.createElement("div");
-    div.className = "thought";
-    div.onclick = () => div.querySelector(".thought-body").classList.toggle("open");
-
-    div.innerHTML = `
-      <div class="thought-header">
-        <h3 class="thought-title">${t.title}</h3>
-        <p class="thought-date">${t.date}</p>
-      </div>
-      <div class="thought-body">${formattedText}</div>
-    `;
-
-    container.appendChild(div);
-  });
-}
-
-  
-    window.addEventListener("DOMContentLoaded", loadThoughts);
-  </script>
-  
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience | Matthew Le</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mediaqueries.css" />
 </head>
-<body class = "no-scroll">
+<body>
   <!-- NAVBAR -->
 <nav id="desktop-nav" class="navbar">
   <div class="logo">matt le</div>
@@ -96,58 +36,13 @@
   </div>
 </nav>
 
-  <section id="home">
-    <div class="section__pic-container slide-left">
-      <div class="glow-ring">
-        <img src="./assets/ghibli_headshot.png" alt="Matthew Le Profile Picture" />
-      </div>      
-    </div>
-    <div class="section__text slide-right">
-    
-      <h1 class="title">Matthew Le</h1>
-      <p class="section__text__p2"><span id="typing-text"></span></p>
 
-      <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('./assets/Matthew_Le_Resume.pdf')">
-          Download Resume
-        </button>
-        <button class="btn btn-color-1" onclick="location.href='./#contact'">
-          Contact Info
-        </button>
-      </div>
-      <div id = "socials-container">
-        <img src="./assets/linkedin.png" alt = "My LinkedIn profile"
-        class = "icon" onclick="location.href='https://www.linkedin.com/in/matthew-le-35890b267/'"/>
-        <img src="./assets/github.png" alt = "My Github profile"
-        class = "icon" onclick="location.href='https://github.com/matthewwle'"/>
-      
-  </section>
-  <section id="about">
-    
-    <h1 class="title"> about me</h1>
-    <div class = "section-container">
-      <div class="section_pic-container">
-        <img src="./assets/AboutMePhoto.jpg"
-        alt="Profile Picture"
-        class = "about-pic"
-        />
-      </div>
-      <div class = "about-details-container">
-        <div class="text-container">
-          <p>
-            hey! my name is matt and i'm a 21 year old ling+cs student at ucla. i love all things business and tech,
-            hoping to do something in the product management field. i love to create: products, businesses, ads, anything
-            and everything. when im not doing such, i love to play volleyball, lift weights, and read up on self improvement. 
 
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
   <section id="experience" class="timeline-section">
     <h1 class="title">experience</h1>
     <div class="timeline">
-  
+      <!-- Paste your timeline entries here -->
+
       <div class="timeline-entry">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
@@ -249,32 +144,21 @@
           <div class="description">hopefully this is fun, i'm excited</div>
         </div>
       </div>
-  
-      
+    </div>
   </section>
-  
 
-  <section id="thoughts">
-    <h1 class="title">Thoughts</h1>
-    <div class="thoughts-container">Loading...</div>
-  </section>
-  
-  
+  <!-- FOOTER -->
+<footer class="footer">
+  <nav>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="thoughts.html">Thoughts</a></li>
+    </ul>
+  </nav>
+  <p>&#169; 2025 Matthew Le. All Rights Reserved</p>
+</footer>
 
-  
-  
-  <footer class="footer">
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="experience.html">Experience</a></li>
-        <li><a href="thoughts.html">Thoughts</a></li>
-      </ul>
-    </nav>
-    <p>&#169; 2025 Matthew Le. All Rights Reserved</p>
-  </footer>
-  
   <script src="script.js"></script>
 </body>
 </html>

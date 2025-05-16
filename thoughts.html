@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thoughts | Matthew Le</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mediaqueries.css" />
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAd0U23AV7uwoikBWOWQjBhWlJCDEMCArM",
+      authDomain: "matthewle-website.firebaseapp.com",
+      projectId: "matthewle-website",
+      storageBucket: "matthewle-website.appspot.com",
+      messagingSenderId: "702904294880",
+      appId: "1:702904294880:web:e18632b8f554e5b21e5f85",
+      measurementId: "G-T08ME0BK0N"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadThoughts() {
+      const thoughtsRef = collection(db, "thoughts");
+      const q = query(thoughtsRef, orderBy("date", "desc"));
+      const querySnapshot = await getDocs(q);
+
+      const container = document.querySelector(".thoughts-container");
+      container.innerHTML = "";
+
+      querySnapshot.forEach((doc) => {
+        const t = doc.data();
+        const formattedText = t.text
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\n/g, "<br><br>");
+
+        const div = document.createElement("div");
+        div.className = "thought";
+        div.onclick = () => div.querySelector(".thought-body").classList.toggle("open");
+
+        div.innerHTML = `
+          <div class="thought-header">
+            <h3 class="thought-title">${t.title}</h3>
+            <p class="thought-date">${t.date}</p>
+          </div>
+          <div class="thought-body">${formattedText}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", loadThoughts);
+  </script>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav id="desktop-nav" class="navbar">
+  <div class="logo">matt le</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="thoughts.html">Thoughts</a></li>
+  </ul>
+</nav>
+
+<nav id="hamburger-nav" class="navbar">
+  <div class="logo">matt le</div>
+  <div class="hamburger-menu">
+    <div class="hamburger-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="menu-links">
+      <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+      <li><a href="about.html" onclick="toggleMenu()">About</a></li>
+      <li><a href="experience.html" onclick="toggleMenu()">Experience</a></li>
+      <li><a href="thoughts.html" onclick="toggleMenu()">Thoughts</a></li>
+    </div>
+  </div>
+</nav>
+
+
+
+  <section id="thoughts">
+    <h1 class="title">Thoughts</h1>
+    <div class="thoughts-container">Loading...</div>
+  </section>
+
+  <footer class="footer">
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="thoughts.html">Thoughts</a></li>
+      </ul>
+    </nav>
+    <p>&#169; 2025 Matthew Le. All Rights Reserved</p>
+  </footer>
+  
+
+  <script src="script.js"></script>
+</body>
+</html>
